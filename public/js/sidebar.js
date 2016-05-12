@@ -46,16 +46,18 @@ function addItineraryItem(modelType) {
         break;
     }
 
-    $itineraryItem = $(`<div class="itinerary-item">
-                <span class="title">${$select.val()}</span>
-                <button class="btn btn-xs btn-danger remove btn-circle">x</button>
-              </div>`);
+    var $itineraryItem = $('<div class="itinerary-item"></div>');
+    var $title = $(`<span class="title">${$select.val()}</span>`);
+    var $removeButton = $('<button class="btn btn-xs btn-danger remove btn-circle">x</button>');
+
+    $itineraryItem.append($title).append($removeButton);
+
     if (!isItemInList($select.val(), $list)) {
         $list.append($itineraryItem);
         var selectionIndex = $select.prop('selectedIndex');
         var coords = modelArray[selectionIndex].place.location;
         var marker = drawMarker(modelType, coords);
-        addRemoveBtnHandler($itineraryItem.children('.remove'), marker);
+        addRemoveBtnHandler($removeButton, marker);
     }
 }
 
