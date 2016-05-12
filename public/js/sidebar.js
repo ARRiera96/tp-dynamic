@@ -55,16 +55,12 @@ function addItineraryItem(modelType) {
         var selectionIndex = $select.prop('selectedIndex');
         var coords = modelArray[selectionIndex].place.location;
         var marker = drawMarker(modelType, coords);
-        addRemoveBtnHandler($itineraryItem.children()[1], marker);
+        addRemoveBtnHandler($itineraryItem.children('.remove'), marker);
     }
 }
 
 $('#hotel-choices+button').on('click', function () {
-    var hotel = $hotelList.children()
-    if (hotel.length) {
-        $($(hotel[0]).children()[1]).trigger('click');
-        hotel.remove()
-    }
+    $hotelList.find('.remove').trigger('click')
     addItineraryItem('hotel');
 });
 
@@ -78,9 +74,8 @@ $('#activity-choices+button').on('click', function () {
 
 
 //Button Event Handlers
-function addRemoveBtnHandler(button, marker) {
-    $(button).on('click', function () {
-        console.log($(this).siblings()[0]);
+function addRemoveBtnHandler($button, marker) {
+    $button.on('click', function () {
         $(this).parent().remove();
         marker.setMap(null);
     })
