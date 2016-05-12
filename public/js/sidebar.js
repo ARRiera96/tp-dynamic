@@ -50,7 +50,9 @@ function addItineraryItem(modelType) {
     var $title = $(`<span class="title">${$select.val()}</span>`);
     var $removeButton = $('<button class="btn btn-xs btn-danger remove btn-circle">x</button>');
 
-    $itineraryItem.append($title).append($removeButton);
+    $itineraryItem
+        .append($title)
+        .append($removeButton);
 
     if (!isItemInList($select.val(), $list)) {
         $list.append($itineraryItem);
